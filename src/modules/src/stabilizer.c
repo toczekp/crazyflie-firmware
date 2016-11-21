@@ -27,6 +27,7 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "mpu6500.h"
 
 #include "system.h"
 #include "log.h"
@@ -54,6 +55,7 @@ static setpoint_t setpoint;
 static sensorData_t sensorData;
 static state_t state;
 static control_t control;
+static int testtesttest;
 
 static void stabilizerTask(void* param);
 
@@ -126,6 +128,8 @@ static void stabilizerTask(void* param)
     stateController(&control, &sensorData, &state, &setpoint, tick);
     powerDistribution(&control);
 
+    testtesttest = (int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
+
     tick++;
   }
 }
@@ -170,3 +174,8 @@ LOG_GROUP_STOP(mag)
 LOG_GROUP_START(controller)
 LOG_ADD(LOG_INT16, ctr_yaw, &control.yaw)
 LOG_GROUP_STOP(controller)
+
+LOG_GROUP_START(convTest)
+LOG_ADD(LOG_FLOAT, accXfloat, &sensorData.acc.x)
+LOG_ADD(LOG_INT16, accXint,   &testtesttest)
+LOG_GROUP_STOP(convTest)
