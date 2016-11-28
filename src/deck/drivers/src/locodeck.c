@@ -115,7 +115,7 @@ static dwDevice_t *dwm = &dwm_device;
 
 static uint32_t timeout;
 
-float testDist1 = 0;
+float testDist1 = 5;
 
 static void txCallback(dwDevice_t *dev)
 {
