@@ -57,6 +57,7 @@ static sensorData_t sensorData;
 static state_t state;
 static control_t control;
 static int testtesttest;
+static int choose;
 
 static void stabilizerTask(void* param);
 
@@ -98,6 +99,8 @@ bool stabilizerTest(void)
 
 static void stabilizerTask(void* param)
 {
+ int oddTester = 0;
+
   uint32_t tick = 0;
   uint32_t lastWakeTime;
   vTaskSetApplicationTaskTag(0, (void*)TASK_STABILIZER_ID_NBR);
@@ -128,10 +131,17 @@ static void stabilizerTask(void* param)
 
     stateController(&control, &sensorData, &state, &setpoint, tick);
     powerDistribution(&control);
+    if(oddTester == 0){
+    	choose = 0;
+    	testtesttest = testDist1;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
+    }else{
+    	choose = 1;
+    	testtesttest = -1;
 
-    testtesttest = testDist1;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
+    }
 
 
+    if(!oddTester) {oddTester = 1;} else{oddTester = 0;}
 
     tick++;
   }
@@ -180,5 +190,6 @@ LOG_GROUP_STOP(controller)
 
 LOG_GROUP_START(convTest)
 LOG_ADD(LOG_FLOAT, accXfloat, &sensorData.acc.x)
-LOG_ADD(LOG_FLOAT, accXfloatTEST,   &testtesttest)
+LOG_ADD(LOG_FLOAT, distTEST,   &testtesttest)
+LOG_ADD(LOG_INT16, choose,   &choose)
 LOG_GROUP_STOP(co6nvTest)
