@@ -36,6 +36,8 @@
 #include "libdw1000.h"
 #include "stabilizer_types.h"
 
+extern int testDist1;
+
 #define SPEED_OF_LIGHT 299792458.0
 // Timestamp counter frequency
 #define LOCODECK_TS_FREQ (499.2e6 * 128)

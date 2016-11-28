@@ -115,6 +115,8 @@ static dwDevice_t *dwm = &dwm_device;
 
 static uint32_t timeout;
 
+int testDist1 = 5;
+
 static void txCallback(dwDevice_t *dev)
 {
   timeout = algorithm->onEvent(dev, eventPacketSent);

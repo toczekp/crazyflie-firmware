@@ -34,6 +34,7 @@
 #include "param.h"
 
 #include "stabilizer.h"
+#include "locodeck.h"
 
 #include "sensors.h"
 #include "commander.h"
@@ -128,7 +129,9 @@ static void stabilizerTask(void* param)
     stateController(&control, &sensorData, &state, &setpoint, tick);
     powerDistribution(&control);
 
-    testtesttest = (int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
+    testtesttest = testDist1*2;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
+
+
 
     tick++;
   }
