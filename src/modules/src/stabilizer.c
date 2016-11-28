@@ -136,7 +136,7 @@ static void stabilizerTask(void* param)
     	choose = 0;
     	testtesttest = testDist1;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
     	oddTester = 1;
-    }else{
+    }else if(oddTester == 1){
     	choose = 1;
     	testtesttest = 5;
     	oddTester = 0;
@@ -188,7 +188,6 @@ LOG_ADD(LOG_INT16, ctr_yaw, &control.yaw)
 LOG_GROUP_STOP(controller)
 
 LOG_GROUP_START(convTest)
-LOG_ADD(LOG_FLOAT, accXfloat, &sensorData.acc.x)
 LOG_ADD(LOG_FLOAT, distTEST,   &testtesttest)
 LOG_ADD(LOG_INT16, choose,   &choose)
-LOG_GROUP_STOP(co6nvTest)
+LOG_GROUP_STOP(convTest)
