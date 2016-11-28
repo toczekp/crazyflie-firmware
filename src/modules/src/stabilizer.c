@@ -129,7 +129,7 @@ static void stabilizerTask(void* param)
     stateController(&control, &sensorData, &state, &setpoint, tick);
     powerDistribution(&control);
 
-    testtesttest = testDist1*2;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
+    testtesttest = testDist1;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
 
 
 
@@ -180,5 +180,5 @@ LOG_GROUP_STOP(controller)
 
 LOG_GROUP_START(convTest)
 LOG_ADD(LOG_FLOAT, accXfloat, &sensorData.acc.x)
-LOG_ADD(LOG_INT16, accXint,   &testtesttest)
-LOG_GROUP_STOP(convTest)
+LOG_ADD(LOG_FLOAT, accXfloatTEST,   &testtesttest)
+LOG_GROUP_STOP(co6nvTest)

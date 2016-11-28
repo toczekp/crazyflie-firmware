@@ -36,7 +36,7 @@
 #include "libdw1000.h"
 #include "stabilizer_types.h"
 
-extern int testDist1;
+extern float testDist1;
 
 #define SPEED_OF_LIGHT 299792458.0
 // Timestamp counter frequency
