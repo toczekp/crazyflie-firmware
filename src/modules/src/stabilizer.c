@@ -99,7 +99,7 @@ bool stabilizerTest(void)
 
 static void stabilizerTask(void* param)
 {
- int oddTester = 0;
+ //int oddTester = 0;
 
   uint32_t tick = 0;
   uint32_t lastWakeTime;
@@ -135,11 +135,11 @@ static void stabilizerTask(void* param)
     if(oddTester == 0){
     	choose = 0;
     	testtesttest = testDist1;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
-    	oddTester = 1;
+    	//oddTester = 1;
     }else if(oddTester == 1){
     	choose = 1;
     	testtesttest = 5;
-    	oddTester = 0;
+    	//oddTester = 0;
     }
 
     tick++;

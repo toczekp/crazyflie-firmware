@@ -33,6 +33,7 @@
 /* Public functions */
 void logInit(void);
 bool logTest(void);
+extern int oddTester;
 
 /* Internal access of log variables */
 int logGetVarId(char* group, char* name);
