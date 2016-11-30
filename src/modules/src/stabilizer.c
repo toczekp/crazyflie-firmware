@@ -56,6 +56,10 @@ static sensorData_t sensorData;
 static state_t state;
 static control_t control;
 
+//int for log
+static int logRoll;
+static int logPitch;
+static int logYaw;
 
 static void stabilizerTask(void* param);
 
@@ -130,6 +134,11 @@ static void stabilizerTask(void* param)
     stateController(&control, &sensorData, &state, &setpoint, tick);
     powerDistribution(&control);
 
+    //logging ints
+    logRoll = ((state.attitude.roll + 180)*65536)/360;
+    logPitch = ((state.attitude.pitch + 180)*65536)/360;
+    logYaw = ((state.attitude.yaw + 180)*65536)/360;
+
     tick++;
   }
 }
@@ -144,6 +153,11 @@ LOG_GROUP_START(stabilizer)
 LOG_ADD(LOG_FLOAT, roll, &state.attitude.roll)
 LOG_ADD(LOG_FLOAT, pitch, &state.attitude.pitch)
 LOG_ADD(LOG_FLOAT, yaw, &state.attitude.yaw)
+
+LOG_ADD(LOG_UINT16, intRoll, &logRoll)
+LOG_ADD(LOG_UINT16, intPitch, &logPitch)
+LOG_ADD(LOG_UINT16, intYaw, &logYaw)
+
 LOG_ADD(LOG_UINT16, thrust, &control.thrust)
 LOG_GROUP_STOP(stabilizer)
 
