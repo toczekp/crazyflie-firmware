@@ -53,6 +53,7 @@
 #include "sound.h"
 #include "filter.h"
 
+#include "log.h"
 /**
  * Enable 250Hz digital LPF mode. However does not work with
  * multiple slave reading through MPU9250 (MAG and BARO), only single for some reason.
@@ -134,6 +135,12 @@ static bool isMagnetometerPresent = false;
 static bool isMpu6500TestPassed = false;
 static bool isAK8963TestPassed = false;
 static bool isLPS25HTestPassed = false;
+
+//ints for logging
+static int logAccX;
+static int logAccY;
+static int logAccZ;
+
 
 // Pre-calculated values for accelerometer alignment
 float cosPitch;
@@ -296,6 +303,12 @@ void processAccGyroMeasurements(const uint8_t *buffer)
   sensors.gyro.y =  (gy - gyroBias.y) * SENSORS_DEG_PER_LSB_CFG;
   sensors.gyro.z =  (gz - gyroBias.z) * SENSORS_DEG_PER_LSB_CFG;
   applyAxis3fLpf((lpf2pData*)(&gyroLpf), &sensors.gyro);
+
+  //logging parameters in int
+  logAccX = -ax;//minus sign madafakas!!!!
+  logAccY = ay;
+  logAccZ = az;
+
 
   accScaled.x = -(ax) * SENSORS_G_PER_LSB_CFG / accScale;
   accScaled.y =  (ay) * SENSORS_G_PER_LSB_CFG / accScale;
@@ -867,6 +880,12 @@ static void applyAxis3fLpf(lpf2pData *data, Axis3f* in)
     in->axis[i] = lpf2pApply(&data[i], in->axis[i]);
   }
 }
+
+LOG_GROUP_START(sensorscf2)
+LOG_ADD(LOG_INT16, intAccX, &logAccX)
+LOG_ADD(LOG_INT16, intAccY, &logAccY)
+LOG_ADD(LOG_INT16, intAccZ, &logAccZ)
+LOG_GROUP_STOP(sensorscf2)
 
 PARAM_GROUP_START(imu_sensors)
 PARAM_ADD(PARAM_UINT8 | PARAM_RONLY, HMC5883L, &isMagnetometerPresent)
