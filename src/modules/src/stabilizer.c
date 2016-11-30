@@ -61,6 +61,12 @@ static int logRoll;
 static int logPitch;
 static int logYaw;
 
+//ints for logging
+static int logAccX;
+static int logAccY;
+static int logAccZ;
+
+
 static void stabilizerTask(void* param);
 
 void stabilizerInit(void)
@@ -139,6 +145,11 @@ static void stabilizerTask(void* param)
     logPitch = ((state.attitude.pitch + 180)*65536)/360;
     logYaw = ((state.attitude.yaw + 180)*65536)/360;
 
+    logAccX = ((sensorData.acc.x + 10)*65536)/20;
+    logAccY = ((sensorData.acc.y + 10)*65536)/20;
+    logAccZ = ((sensorData.acc.z + 10)*65536)/20;
+
+
     tick++;
   }
 }
@@ -165,6 +176,9 @@ LOG_GROUP_START(acc)
 LOG_ADD(LOG_FLOAT, x, &sensorData.acc.x)
 LOG_ADD(LOG_FLOAT, y, &sensorData.acc.y)
 LOG_ADD(LOG_FLOAT, z, &sensorData.acc.z)
+LOG_ADD(LOG_UINT16, intAccX, &logAccX)
+LOG_ADD(LOG_UINT16, intAccY, &logAccY)
+LOG_ADD(LOG_UINT16, intAccZ, &logAccZ)
 LOG_GROUP_STOP(acc)
 
 LOG_GROUP_START(baro)
