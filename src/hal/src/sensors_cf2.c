@@ -887,6 +887,13 @@ LOG_ADD(LOG_INT16, intAccY, &logAccY)
 LOG_ADD(LOG_INT16, intAccZ, &logAccZ)
 LOG_GROUP_STOP(sensorscf2)
 
+LOG_GROUP_START(acc2)
+LOG_ADD(LOG_FLOAT, accX, &sensors.acc.x)
+LOG_ADD(LOG_FLOAT, accY, &sensors.acc.y)
+LOG_ADD(LOG_FLOAT, accZ, &sensors.acc.z)
+LOG_ADD(LOG_FLOAT, scale, &accScale)
+LOG_GROUP_STOP(acc2)
+
 PARAM_GROUP_START(imu_sensors)
 PARAM_ADD(PARAM_UINT8 | PARAM_RONLY, HMC5883L, &isMagnetometerPresent)
 PARAM_ADD(PARAM_UINT8 | PARAM_RONLY, MS5611, &isBarometerPresent) // TODO: Rename MS5611 to LPS25H. Client needs to be updated at the same time.
