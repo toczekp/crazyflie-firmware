@@ -115,7 +115,12 @@ static dwDevice_t *dwm = &dwm_device;
 
 static uint32_t timeout;
 
-float testDist1 = 5;
+static int logDist1;
+static int logDist2;
+static int logDist3;
+static int logDist4;
+static int logDist5;
+static int logDist6;
 
 static void txCallback(dwDevice_t *dev)
 {
@@ -150,6 +155,13 @@ static void uwbTask(void* parameters)
     } else {
       timeout = algorithm->onEvent(dwm, eventTimeout);
     }
+    logDist1 = ((algoOptions.distance[0] + 0.5)*65536)/3;
+    logDist2 = ((algoOptions.distance[1] + 0.5)*65536)/3;
+    logDist3 = ((algoOptions.distance[2] + 0.5)*65536)/3;
+    logDist4 = ((algoOptions.distance[3] + 0.5)*65536)/3;
+    logDist5 = ((algoOptions.distance[4] + 0.5)*65536)/3;
+    logDist6 = ((algoOptions.distance[5] + 0.5)*65536)/3;
+
   }
 }
 
@@ -353,6 +365,15 @@ LOG_ADD(LOG_FLOAT, pressure7, &algoOptions.pressures[6])
 LOG_ADD(LOG_FLOAT, pressure8, &algoOptions.pressures[7])
 LOG_ADD(LOG_UINT16, state, &algoOptions.rangingState)
 LOG_GROUP_STOP(ranging)
+
+LOG_GROUP_START(distances)
+LOG_ADD(LOG_INT16, intDist1, &logDist1)
+LOG_ADD(LOG_INT16, intDist2, &logDist2)
+LOG_ADD(LOG_INT16, intDist3, &logDist3)
+LOG_ADD(LOG_INT16, intDist4, &logDist4)
+LOG_ADD(LOG_INT16, intDist5, &logDist5)
+LOG_ADD(LOG_INT16, intDist6, &logDist6)
+LOG_GROUP_STOP(distances)
 
 PARAM_GROUP_START(anchorpos)
 PARAM_ADD(PARAM_FLOAT, anchor0x, &algoOptions.anchorPosition[0].x)
