@@ -140,7 +140,6 @@ static int logDeleteBlock(int id);
 static int logStartBlock(int id, unsigned int period);
 static int logStopBlock(int id);
 static void logReset();
-int oddTester;
 
 void logInit(void)
 {
@@ -196,11 +195,6 @@ void logTask(void * prm)
 		if (p.channel==CONTROL_CH)
 		  logControlProcess();
 		xSemaphoreGive(logLock);
-		if(oddTester == 0){
-			oddTester = 1;
-		}else if(oddTester == 1){
-			oddTester = 0;
-		}
 	}
 }
 

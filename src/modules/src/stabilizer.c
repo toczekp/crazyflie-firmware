@@ -56,8 +56,7 @@ static setpoint_t setpoint;
 static sensorData_t sensorData;
 static state_t state;
 static control_t control;
-static float testtesttest;
-static int choose;
+
 
 static void stabilizerTask(void* param);
 
@@ -132,16 +131,6 @@ static void stabilizerTask(void* param)
     stateController(&control, &sensorData, &state, &setpoint, tick);
     powerDistribution(&control);
 
-    if(oddTester == 0){
-    	choose = 0;
-    	testtesttest = testDist1;//(int) (&sensorData.acc.y) / MPU6500_G_PER_LSB_16;
-    	//oddTester = 1;
-    }else if(oddTester == 1){
-    	choose = 1;
-    	testtesttest = 5;
-    	//oddTester = 0;
-    }
-
     tick++;
   }
 }
@@ -187,7 +176,7 @@ LOG_GROUP_START(controller)
 LOG_ADD(LOG_INT16, ctr_yaw, &control.yaw)
 LOG_GROUP_STOP(controller)
 
-LOG_GROUP_START(convTest)
-LOG_ADD(LOG_FLOAT, distTEST,   &testtesttest)
-LOG_ADD(LOG_INT16, choose,   &choose)
-LOG_GROUP_STOP(convTest)
+//LOG_GROUP_START(convTest)
+//LOG_ADD(LOG_FLOAT, distTEST,   &testtesttest)
+//LOG_ADD(LOG_INT16, choose,   &choose)
+//LOG_GROUP_STOP(convTest)
