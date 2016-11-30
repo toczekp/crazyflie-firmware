@@ -155,12 +155,12 @@ static void uwbTask(void* parameters)
     } else {
       timeout = algorithm->onEvent(dwm, eventTimeout);
     }
-    logDist1 = ((algoOptions.distance[0] + 0.5)*65536)/3;
-    logDist2 = ((algoOptions.distance[1] + 0.5)*65536)/3;
-    logDist3 = ((algoOptions.distance[2] + 0.5)*65536)/3;
-    logDist4 = ((algoOptions.distance[3] + 0.5)*65536)/3;
-    logDist5 = ((algoOptions.distance[4] + 0.5)*65536)/3;
-    logDist6 = ((algoOptions.distance[5] + 0.5)*65536)/3;
+    logDist1 = ((algoOptions.distance[0] + 0.5)*65536)/5;
+    logDist2 = ((algoOptions.distance[1] + 0.5)*65536)/5;
+    logDist3 = ((algoOptions.distance[2] + 0.5)*65536)/5;
+    logDist4 = ((algoOptions.distance[3] + 0.5)*65536)/5;
+    logDist5 = ((algoOptions.distance[4] + 0.5)*65536)/5;
+    logDist6 = ((algoOptions.distance[5] + 0.5)*65536)/5;
 
   }
 }
