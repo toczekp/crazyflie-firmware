@@ -146,7 +146,6 @@ static void uwbTask(void* parameters)
     if (xSemaphoreTake(irqSemaphore, timeout/portTICK_PERIOD_MS)) {
       do{
           dwHandleInterrupt(dwm);
-          testDist1 = algoOptions.distance[1];
       } while(digitalRead(DECK_GPIO_RX1) != 0);
     } else {
       timeout = algorithm->onEvent(dwm, eventTimeout);

@@ -34,7 +34,6 @@
 #include "param.h"
 
 #include "stabilizer.h"
-#include "locodeck.h"
 
 #include "sensors.h"
 #include "commander.h"
