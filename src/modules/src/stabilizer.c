@@ -66,7 +66,7 @@ static int logAccX;
 static int logAccY;
 static int logAccZ;
 
-static int testIntThrust;
+static int testIntThrust=0;
 
 
 static void stabilizerTask(void* param);
@@ -140,7 +140,9 @@ static void stabilizerTask(void* param)
     sitAwUpdateSetpoint(&setpoint, &sensorData, &state);
 
     stateController(&control, &sensorData, &state, &setpoint, tick);
-    control.thrust = testIntThrust;
+
+    //control.thrust = testIntThrust;
+
     powerDistribution(&control);
 
     //logging ints
