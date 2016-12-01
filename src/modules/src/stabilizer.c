@@ -66,6 +66,8 @@ static int logAccX;
 static int logAccY;
 static int logAccZ;
 
+static int testIntThrust;
+
 
 static void stabilizerTask(void* param);
 
@@ -138,6 +140,7 @@ static void stabilizerTask(void* param)
     sitAwUpdateSetpoint(&setpoint, &sensorData, &state);
 
     stateController(&control, &sensorData, &state, &setpoint, tick);
+    control.thrust = testIntThrust;
     powerDistribution(&control);
 
     //logging ints
@@ -202,6 +205,10 @@ LOG_GROUP_STOP(mag)
 LOG_GROUP_START(controller)
 LOG_ADD(LOG_INT16, ctr_yaw, &control.yaw)
 LOG_GROUP_STOP(controller)
+
+PARAM_GROUP_START(thrust)
+  PARAM_ADD(PARAM_UINT16, testThrust, &testIntThrust)
+PARAM_GROUP_STOP(thrust)
 
 //LOG_GROUP_START(convTest)
 //LOG_ADD(LOG_FLOAT, distTEST,   &testtesttest)
